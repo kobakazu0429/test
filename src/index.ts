@@ -2,17 +2,6 @@ import { clone } from "./clone";
 import { matchers } from "./matchers";
 import type { MatcherName, Result } from "./matchers";
 
-export type TestContext = Record<string, unknown>;
-
-type ValidTestReturnValues = void | undefined;
-type TestReturnValuePromise = Promise<unknown>;
-
-export type TestReturnValue = ValidTestReturnValues | TestReturnValuePromise;
-
-export type PromiseReturningTestFn = (
-  this: TestContext | undefined
-) => TestReturnValue;
-
 type TestName = string;
 type TestFn = () => void | Promise<void>;
 type TestCase = [testName: TestName, testFn: TestFn, timeout?: number];
@@ -72,7 +61,9 @@ export const expect = (received: unknown) => {
 export const run = async () => {
   const result = [];
   for await (const [testName, testFn, timeout] of _tests) {
-    const testResult = await new Promise<any>(async (resolve, reject) => {
+    // Refactor: me
+    // eslint-disable-next-line no-async-promise-executor
+    const testResult = await new Promise<any>(async (resolve, _reject) => {
       try {
         if (timeout) {
           const timeoutId = setTimeout(() => {
