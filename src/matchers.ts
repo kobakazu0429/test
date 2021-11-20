@@ -12,7 +12,7 @@ export const matchers = {
 
   // https://github.com/facebook/jest/blob/7bb400c373/packages/expect/src/matchers.ts#L129
   // under MIT License and modified
-  toBeCloseTo(received: number, expected: number, precision: number = 2) {
+  toBeCloseTo(received: number, expected: number, precision = 2) {
     if (typeof expected !== "number" || typeof received !== "number") {
       return { received, expected, pass: false };
     }
