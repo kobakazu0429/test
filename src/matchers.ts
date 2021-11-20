@@ -1,9 +1,3 @@
-export interface Result {
-  received: unknown;
-  expected: unknown;
-  pass: boolean;
-}
-
 export const matchers = {
   toBe(received: unknown, expected: unknown) {
     const pass = Object.is(received, expected);
