@@ -24,7 +24,10 @@ export const test = (...t: TestCase) => {
 
 const _result: Record<
   "passed" | "failed",
-  Array<Result & { matcherName: string }>
+  Array<
+    Partial<Pick<Result, "expected" | "received">> &
+      Pick<Result, "pass"> & { matcherName: string } & { error?: any }
+  >
 > = {
   passed: [],
   failed: [],
@@ -69,17 +72,32 @@ export const expect = (received: unknown) => {
 export const run = async () => {
   const result = [];
   for await (const [testName, testFn, timeout] of _tests) {
-    await new Promise<void>(async (resovle, reject) => {
+    const testResult = await new Promise<any>(async (resolve, reject) => {
       try {
-        const timeoutId = setTimeout(reject, timeout);
-        await testFn();
-        clearTimeout(timeoutId);
-        resovle();
+        if (timeout) {
+          const timeoutId = setTimeout(() => {
+            resolve({
+              testName,
+              error: `timeout (specified time: ${timeout}ms)`,
+            });
+          }, timeout);
+          await testFn();
+          clearTimeout(timeoutId);
+          resolve(null);
+        } else {
+          await testFn();
+          resolve(null);
+        }
       } catch (error) {
-        reject();
+        resolve(error);
       }
     });
-    result.push({ testName, result: clone(_result) });
+
+    if (testResult) {
+      result.push(testResult);
+    } else {
+      result.push({ testName, result: clone(_result) });
+    }
     _ClearResult();
   }
   return result;
