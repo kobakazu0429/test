@@ -1,6 +1,6 @@
 {
   "name": "@kobakazu0429/test",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/index.umd.js",
   "exports": {
     ".": {

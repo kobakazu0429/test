@@ -1,6 +1,7 @@
 import { clone } from "./clone";
 import { matchers } from "./matchers";
 import type { MatcherName } from "./matchers";
+export { constructResultsHTML } from "./prettify";
 
 type TestName = string;
 type TestFn = () => void | Promise<void>;
