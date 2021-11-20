@@ -1,4 +1,10 @@
 import { test as myTest, expect as myExpect, run } from "../src";
+import { performance } from "perf_hooks";
+
+beforeAll(() => {
+  // @ts-expect-error
+  globalThis.performance = performance;
+});
 
 test("sum", async () => {
   myTest("sum(1, 2) should be 3", () => {
@@ -35,8 +41,8 @@ test("sum", async () => {
     100
   );
 
-  const result = await run();
-
+  const { result, duration } = await run();
+  expect(Number.isFinite(duration)).toBeTruthy();
   expect(JSON.stringify(result, null, 2)).toMatchInlineSnapshot(`
     "[
       {

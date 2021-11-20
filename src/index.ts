@@ -59,7 +59,8 @@ export const expect = (received: unknown) => {
 };
 
 export const run = async () => {
-  const result = [];
+  const startTime = globalThis.performance.now();
+  const result: any[] = [];
   for await (const [testName, testFn, timeout] of _tests) {
     // Refactor: me
     // eslint-disable-next-line no-async-promise-executor
@@ -91,5 +92,6 @@ export const run = async () => {
     }
     _ClearResult();
   }
-  return result;
+  const duration = globalThis.performance.now() - startTime;
+  return { result, duration };
 };
