@@ -1,6 +1,6 @@
 {
   "name": "@kobakazu0429/test",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./dist/index.umd.js",
   "exports": {
     ".": {
@@ -10,7 +10,8 @@
   },
   "types": "./dist/index.d.ts",
   "files": [
-    "/dist"
+    "dist",
+    "src"
   ],
   "repository": "ssh://git@github.com/kobakazu0429/test.git",
   "author": "kobakazu0429 <kobakazu10@gmail.com>",
