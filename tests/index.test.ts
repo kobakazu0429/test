@@ -23,6 +23,10 @@ test("sum", async () => {
     myExpect(1.234).not.toBeCloseTo(1.233, 4);
   });
 
+  myTest("fail test", () => {
+    myExpect(10).toBe(-1);
+  });
+
   myTest("async function (no timeout)", async () => {
     const actual = await new Promise((resolve) => {
       setTimeout(() => resolve("1"), 1000);
@@ -107,6 +111,20 @@ test("sum", async () => {
             }
           ],
           \\"failed\\": []
+        }
+      },
+      {
+        \\"testName\\": \\"fail test\\",
+        \\"result\\": {
+          \\"passed\\": [],
+          \\"failed\\": [
+            {
+              \\"received\\": 10,
+              \\"expected\\": -1,
+              \\"pass\\": false,
+              \\"matcherName\\": \\"toBe\\"
+            }
+          ]
         }
       },
       {
