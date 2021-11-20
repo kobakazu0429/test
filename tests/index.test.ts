@@ -15,12 +15,12 @@ test("sum", async () => {
 
   myTest("toBe, toBeCloseTo, and each not version", () => {
     myExpect(1).toBe(1);
-    myExpect(1).not.toBe(1);
+    myExpect(1).not.toBe(2);
     myExpect(1).toBeCloseTo(1);
-    myExpect(1).not.toBeCloseTo(1);
+    myExpect(1).not.toBeCloseTo(2);
 
-    myExpect(1).toBeCloseTo(1, 2);
-    myExpect(1).not.toBeCloseTo(1, 2);
+    myExpect(1.234).toBeCloseTo(1.233, 2);
+    myExpect(1.234).not.toBeCloseTo(1.233, 4);
   });
 
   myTest("async function (no timeout)", async () => {
@@ -77,37 +77,36 @@ test("sum", async () => {
             },
             {
               \\"received\\": 1,
-              \\"expected\\": 1,
+              \\"expected\\": 2,
               \\"pass\\": true,
-              \\"matcherName\\": \\"toBeCloseTo\\"
-            },
-            {
-              \\"received\\": 1,
-              \\"expected\\": 1,
-              \\"pass\\": true,
-              \\"matcherName\\": \\"toBeCloseTo\\"
-            }
-          ],
-          \\"failed\\": [
-            {
-              \\"received\\": 1,
-              \\"expected\\": 1,
-              \\"pass\\": false,
               \\"matcherName\\": \\"not.toBe\\"
             },
             {
               \\"received\\": 1,
               \\"expected\\": 1,
-              \\"pass\\": false,
-              \\"matcherName\\": \\"not.toBeCloseTo\\"
+              \\"pass\\": true,
+              \\"matcherName\\": \\"toBeCloseTo\\"
             },
             {
               \\"received\\": 1,
-              \\"expected\\": 1,
-              \\"pass\\": false,
+              \\"expected\\": 2,
+              \\"pass\\": true,
+              \\"matcherName\\": \\"not.toBeCloseTo\\"
+            },
+            {
+              \\"received\\": 1.234,
+              \\"expected\\": 1.233,
+              \\"pass\\": true,
+              \\"matcherName\\": \\"toBeCloseTo\\"
+            },
+            {
+              \\"received\\": 1.234,
+              \\"expected\\": 1.233,
+              \\"pass\\": true,
               \\"matcherName\\": \\"not.toBeCloseTo\\"
             }
-          ]
+          ],
+          \\"failed\\": []
         }
       },
       {
