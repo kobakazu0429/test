@@ -1,0 +1,50 @@
+.jest-lite-report {
+  --color-fail: #f7362b;
+  --color-pass: #3dbc59;
+  --spacing-tight: 0.5em;
+
+  /* --color-base: #222; */
+  /* background: var(--color-base); */
+
+  font: 100% Consolas, Monaco, monospace;
+  color: white;
+  box-sizing: border-box;
+  line-height: 1.5em;
+}
+
+.jest-lite-report__result {
+  margin-bottom: var(--spacing-tight);
+}
+
+.jest-lite-report__status {
+  display: inline-block;
+  padding: 0.2em 0.4em;
+}
+
+.jest-lite-report__status-icon {
+  display: inline-block;
+  width: 1em;
+}
+
+.jest-lite-report__status--pass {
+  background: var(--color-pass);
+}
+
+.jest-lite-report__status--fail {
+  background: var(--color-fail);
+}
+
+.jest-lite-report__summary-status--fail {
+  color: var(--color-fail);
+}
+
+.jest-lite-report__summary-status--pass {
+  color: var(--color-pass);
+}
+
+.jest-lite-report__errors {
+  margin-top: var(--spacing-tight);
+  padding-left: 1.5em;
+  white-space: pre;
+  color: var(--color-fail);
+}
