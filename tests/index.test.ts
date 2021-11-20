@@ -51,6 +51,7 @@ test("sum", async () => {
     "[
       {
         \\"testName\\": \\"sum(1, 2) should be 3\\",
+        \\"type\\": \\"done\\",
         \\"result\\": {
           \\"passed\\": [
             {
@@ -71,6 +72,7 @@ test("sum", async () => {
       },
       {
         \\"testName\\": \\"toBe, toBeCloseTo, and each not version\\",
+        \\"type\\": \\"done\\",
         \\"result\\": {
           \\"passed\\": [
             {
@@ -115,6 +117,7 @@ test("sum", async () => {
       },
       {
         \\"testName\\": \\"fail test\\",
+        \\"type\\": \\"done\\",
         \\"result\\": {
           \\"passed\\": [],
           \\"failed\\": [
@@ -129,6 +132,7 @@ test("sum", async () => {
       },
       {
         \\"testName\\": \\"async function (no timeout)\\",
+        \\"type\\": \\"done\\",
         \\"result\\": {
           \\"passed\\": [
             {
@@ -142,6 +146,7 @@ test("sum", async () => {
         }
       },
       {
+        \\"type\\": \\"error\\",
         \\"testName\\": \\"async function (timeout)\\",
         \\"error\\": \\"timeout (specified time: 100ms)\\"
       }

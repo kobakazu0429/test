@@ -61,23 +61,27 @@ export const expect = (received: unknown) => {
   return expectation;
 };
 
-interface BaseResult {
+interface ErrorResult {
+  type: "error";
   testName: string;
+  error: any;
 }
 
-interface ErrorResult extends BaseResult {
-  error?: any;
-}
-
-interface DoneResult extends BaseResult {
+interface DoneResult {
+  type: "done";
+  testName: string;
   result: TestResult;
 }
 
 export type Result = DoneResult | ErrorResult;
+export type RunResult = {
+  duration: number;
+  result: Result[];
+};
 
-export const run = async () => {
+export const run = async (): Promise<RunResult> => {
   const startTime = globalThis.performance.now();
-  const result: Result[] = [];
+  const result: Array<Result> = [];
   for await (const [testName, testFn, timeout] of _tests) {
     // Refactor: me
     // eslint-disable-next-line no-async-promise-executor
@@ -86,6 +90,7 @@ export const run = async () => {
         if (timeout) {
           const timeoutId = setTimeout(() => {
             resolve({
+              type: "error",
               testName,
               error: `timeout (specified time: ${timeout}ms)`,
             });
@@ -105,7 +110,11 @@ export const run = async () => {
     if (r) {
       result.push(r);
     } else {
-      result.push({ testName, result: clone<TestResult>(_testResult) });
+      result.push({
+        testName,
+        type: "done",
+        result: clone<TestResult>(_testResult),
+      });
     }
     _ClearResult();
   }
