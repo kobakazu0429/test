@@ -22,7 +22,10 @@ export const test = (...t: TestCase) => {
   _tests.push(t);
 };
 
-const _result: Record<"passed" | "failed", Result[]> = {
+const _result: Record<
+  "passed" | "failed",
+  Array<Result & { matcherName: string }>
+> = {
   passed: [],
   failed: [],
 };
@@ -45,11 +48,18 @@ export const expect = (received: unknown) => {
     const matcher = matchers[matcherName];
     expectation[matcherName] = (expected, ...rest) => {
       const result = matcher(received as any, expected as any, ...rest);
-      (result.pass ? _result.passed : _result.failed).push(result);
+      (result.pass ? _result.passed : _result.failed).push({
+        ...result,
+        matcherName,
+      });
     };
     expectation.not[matcherName] = (expected, ...rest) => {
       const result = matcher(received as any, expected as any, ...rest);
-      (!result.pass ? _result.passed : _result.failed).push(result);
+      (!result.pass ? _result.passed : _result.failed).push({
+        ...result,
+        pass: !result.pass,
+        matcherName: `not.${matcherName}`,
+      });
     };
   });
 
