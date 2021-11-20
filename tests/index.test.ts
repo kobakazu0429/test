@@ -1,4 +1,4 @@
-import { test as myTest, expect as myExpect, run } from "./index";
+import { test as myTest, expect as myExpect, run } from "../src";
 
 test("sum", async () => {
   myTest("sum(1, 2) should be 3", () => {
