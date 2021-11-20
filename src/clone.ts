@@ -1,4 +1,4 @@
-export const clone = (target: any) => {
+export const clone = <T>(target: any): T => {
   const result: any = Array.isArray(target) ? [] : {};
   for (const key in target) {
     const value = target[key];
