@@ -1,3 +1,4 @@
+import { clone } from "./clone";
 import { matchers } from "./matchers";
 import type { MatcherName, Result } from "./matchers";
 
@@ -56,6 +57,7 @@ export const expect = (received: unknown) => {
 };
 
 export const run = async () => {
+  const result = [];
   for await (const [testName, testFn, timeout] of _tests) {
     await new Promise<void>(async (resovle, reject) => {
       try {
@@ -67,29 +69,8 @@ export const run = async () => {
         reject();
       }
     });
-    console.log(testName, _result);
+    result.push({ testName, result: clone(_result) });
     _ClearResult();
   }
+  return result;
 };
-
-const sum = (a: number, b: number) => a + b;
-
-test("sum(1, 2) should be 3", () => {
-  expect(sum(1, 2)).toBe(3);
-  expect(sum(1, 1)).toBe(3);
-  expect("3").toBe("3");
-});
-
-test("sum(1, -1) should be 0", () => {
-  expect(sum(1, -1)).toBe(0);
-});
-
-run();
-
-expect(1).toBe(1);
-expect(1).not.toBe(1);
-expect(1).toBeCloseTo(1);
-expect(1).not.toBeCloseTo(1);
-
-expect(1).toBeCloseTo(1, 2);
-expect(1).not.toBeCloseTo(1, 2);
