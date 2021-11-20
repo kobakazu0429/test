@@ -1,4 +1,4 @@
-.jest-lite-report {
+.test-report {
   --color-fail: #f7362b;
   --color-pass: #3dbc59;
   --spacing-tight: 0.5em;
@@ -12,37 +12,37 @@
   line-height: 1.5em;
 }
 
-.jest-lite-report__result {
+.test-report__result {
   margin-bottom: var(--spacing-tight);
 }
 
-.jest-lite-report__status {
+.test-report__status {
   display: inline-block;
   padding: 0.2em 0.4em;
 }
 
-.jest-lite-report__status-icon {
+.test-report__status-icon {
   display: inline-block;
   width: 1em;
 }
 
-.jest-lite-report__status--pass {
+.test-report__status--pass {
   background: var(--color-pass);
 }
 
-.jest-lite-report__status--fail {
+.test-report__status--fail {
   background: var(--color-fail);
 }
 
-.jest-lite-report__summary-status--fail {
+.test-report__summary-status--fail {
   color: var(--color-fail);
 }
 
-.jest-lite-report__summary-status--pass {
+.test-report__summary-status--pass {
   color: var(--color-pass);
 }
 
-.jest-lite-report__errors {
+.test-report__errors {
   margin-top: var(--spacing-tight);
   padding-left: 1.5em;
   white-space: pre;

@@ -41,49 +41,49 @@ test("sum", async () => {
   const html = constructResultsHTML(result);
   expect(html).toMatchInlineSnapshot(`
     "
-
-        <div class=\\"jest-lite-report__result\\">
-          <span class=\\"jest-lite-report__status-icon\\">✓</span>
-          <span class=\\"jest-lite-report__status jest-lite-report__status--pass\\">
+        
+        <div class=\\"test-report__result\\">
+          <span class=\\"test-report__status-icon\\">✓</span>
+          <span class=\\"test-report__status test-report__status--pass\\">
             PASS
           </span>
           sum(1, 2) should be 3
-
+          
         </div>
-
-        <div class=\\"jest-lite-report__result\\">
-          <span class=\\"jest-lite-report__status-icon\\">×</span>
-          <span class=\\"jest-lite-report__status jest-lite-report__status--fail\\">
+      
+        <div class=\\"test-report__result\\">
+          <span class=\\"test-report__status-icon\\">×</span>
+          <span class=\\"test-report__status test-report__status--fail\\">
             FAIL
           </span>
           fail test
-
+          
         </div>
-
-        <div class=\\"jest-lite-report__result\\">
-          <span class=\\"jest-lite-report__status-icon\\">✓</span>
-          <span class=\\"jest-lite-report__status jest-lite-report__status--pass\\">
+      
+        <div class=\\"test-report__result\\">
+          <span class=\\"test-report__status-icon\\">✓</span>
+          <span class=\\"test-report__status test-report__status--pass\\">
             PASS
           </span>
           async function (no timeout)
-
+          
         </div>
-
-        <div class=\\"jest-lite-report__result\\">
-          <span class=\\"jest-lite-report__status-icon\\">×</span>
-          <span class=\\"jest-lite-report__status jest-lite-report__status--fail\\">
+      
+        <div class=\\"test-report__result\\">
+          <span class=\\"test-report__status-icon\\">×</span>
+          <span class=\\"test-report__status test-report__status--fail\\">
             FAIL
           </span>
           async function (timeout)
-          <div class=\\"jest-lite-report__errors\\">timeout (specified time: 100ms)</div>
+          <div class=\\"test-report__errors\\">timeout (specified time: 100ms)</div>
         </div>
-
-
-        <span class=\\"jest-lite-report__summary-status jest-lite-report__summary-status--fail\\">
+      
+        
+        <span class=\\"test-report__summary-status test-report__summary-status--fail\\">
           Tests: 2 failed, 2 passed, 4 total<br>
           Time: 0.001s
         </span>
-
+      
       "
   `);
 });

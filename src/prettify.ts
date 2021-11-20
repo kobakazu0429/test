@@ -38,7 +38,7 @@ function constructSummaryHTML(
   timeInMilliseconds: number
 ) {
   return `
-    <span class="jest-lite-report__summary-status jest-lite-report__summary-status--${status}">
+    <span class="test-report__summary-status test-report__summary-status--${status}">
       Tests: ${failed} failed, ${passed} passed, ${passed + failed} total<br>
       Time: ${timeInMilliseconds / 1000}s
     </span>
@@ -49,13 +49,13 @@ function constructResultHTML(status: Status, testName: string, error?: string) {
   const statusIcon = status === "fail" ? "×" : "✓";
 
   const errorHTML = error
-    ? `<div class="jest-lite-report__errors">${escapeHTML(error)}</div>`
+    ? `<div class="test-report__errors">${escapeHTML(error)}</div>`
     : "";
 
   return `
-    <div class="jest-lite-report__result">
-      <span class="jest-lite-report__status-icon">${statusIcon}</span>
-      <span class="jest-lite-report__status jest-lite-report__status--${status}">
+    <div class="test-report__result">
+      <span class="test-report__status-icon">${statusIcon}</span>
+      <span class="test-report__status test-report__status--${status}">
         ${status.toUpperCase()}
       </span>
       ${escapeHTML(testName)}
