@@ -81,7 +81,7 @@ test("sum", async () => {
         
         <span class=\\"test-report__summary-status test-report__summary-status--fail\\">
           Tests: 2 failed, 2 passed, 4 total<br>
-          Time: 0.001s
+          Time: 0.001 [s]
         </span>
       
       "
