@@ -26,7 +26,7 @@
     "test": "jest --silent=false --verbose false"
   },
   "devDependencies": {
-    "@kobakazu0429/eslint-config-typescript": "3.0.0",
+    "@kobakazu0429/eslint-config-typescript": "3.0.3",
     "@types/jest": "27.4.0",
     "@types/node": "16.11.19",
     "eslint": "8.6.0",
