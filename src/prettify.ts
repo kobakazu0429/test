@@ -1,4 +1,4 @@
-import type { RunResult } from "./index";
+import type { Result, RunResult } from "./index";
 
 type Status = "pass" | "fail";
 
@@ -13,13 +13,13 @@ export function constructResultsHTML({
     let testResultHTML = "";
     if (r.type === "error") {
       failed++;
-      testResultHTML += constructResultHTML("fail", r.testName, r.error);
+      testResultHTML += constructResultHTML("fail", r);
     } else if (r.type === "done" && r.result.failed.length !== 0) {
       failed++;
-      testResultHTML += constructResultHTML("fail", r.testName);
+      testResultHTML += constructResultHTML("fail", r);
     } else {
       passed++;
-      testResultHTML += constructResultHTML("pass", r.testName);
+      testResultHTML += constructResultHTML("pass", r);
     }
     return `${currentOutput}${testResultHTML}`;
   }, "");
@@ -51,12 +51,23 @@ function constructSummaryHTML(
   `;
 }
 
-function constructResultHTML(status: Status, testName: string, error?: string) {
+function constructResultHTML(status: Status, result: Result) {
   const statusIcon = status === "fail" ? "×" : "✓";
 
-  const errorHTML = error
-    ? `<div class="test-report__errors">${escapeHTML(error)}</div>`
-    : "";
+  const failedHTML =
+    result.type === "done"
+      ? result.result.failed.map(
+          (f) =>
+            `<div class="test-report__errors">expected: ${escapeHTML(
+              String(f.expected)
+            )}, received: ${escapeHTML(String(f.received))}</div>`
+        )
+      : "";
+
+  const errorHTML =
+    result.type === "error" && result.error
+      ? `<div class="test-report__errors">${escapeHTML(result.error)}}</div>`
+      : "";
 
   return `
     <div class="test-report__result">
@@ -64,7 +75,8 @@ function constructResultHTML(status: Status, testName: string, error?: string) {
       <span class="test-report__status test-report__status--${status}">
         ${status.toUpperCase()}
       </span>
-      ${escapeHTML(testName)}
+      ${escapeHTML(result.testName)}
+      ${failedHTML}
       ${errorHTML}
     </div>
   `;
