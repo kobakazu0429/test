@@ -49,6 +49,7 @@ test("sum", async () => {
           </span>
           sum(1, 2) should be 3
           
+          
         </div>
       
         <div class=\\"test-report__result\\">
@@ -57,6 +58,7 @@ test("sum", async () => {
             FAIL
           </span>
           fail test
+          <div class=\\"test-report__errors\\">expected: -1, received: 10</div>
           
         </div>
       
@@ -67,6 +69,7 @@ test("sum", async () => {
           </span>
           async function (no timeout)
           
+          
         </div>
       
         <div class=\\"test-report__result\\">
@@ -75,6 +78,7 @@ test("sum", async () => {
             FAIL
           </span>
           async function (timeout)
+          
           <div class=\\"test-report__errors\\">timeout (specified time: 100ms)</div>
         </div>
       

@@ -56,17 +56,19 @@ function constructResultHTML(status: Status, result: Result) {
 
   const failedHTML =
     result.type === "done"
-      ? result.result.failed.map(
-          (f) =>
-            `<div class="test-report__errors">expected: ${escapeHTML(
-              String(f.expected)
-            )}, received: ${escapeHTML(String(f.received))}</div>`
-        )
+      ? result.result.failed
+          .map(
+            (f) =>
+              `<div class="test-report__errors">expected: ${escapeHTML(
+                String(f.expected)
+              )}, received: ${escapeHTML(String(f.received))}</div>`
+          )
+          .join("\n")
       : "";
 
   const errorHTML =
     result.type === "error" && result.error
-      ? `<div class="test-report__errors">${escapeHTML(result.error)}}</div>`
+      ? `<div class="test-report__errors">${escapeHTML(result.error)}</div>`
       : "";
 
   return `
