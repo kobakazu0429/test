@@ -105,7 +105,13 @@ export const run = async (): Promise<RunResult> => {
             resolve(null);
           }
         } catch (error) {
-          resolve({ type: "error", testName, error: (error as Error).message });
+          resolve({
+            type: "error",
+            testName,
+            error: JSON.parse(
+              JSON.stringify(error, Object.getOwnPropertyNames(error))
+            ),
+          });
         }
       }
     );
