@@ -65,7 +65,7 @@ export const expect = (received: unknown) => {
 interface ErrorResult {
   type: "error";
   testName: string;
-  error: any;
+  error: { message: string; stack?: string };
 }
 
 interface DoneResult {
@@ -94,7 +94,7 @@ export const run = async (): Promise<RunResult> => {
               resolve({
                 type: "error",
                 testName,
-                error: `timeout (specified time: ${timeout}ms)`,
+                error: { message: `timeout (specified time: ${timeout}ms)` },
               });
             }, timeout);
             await testFn();

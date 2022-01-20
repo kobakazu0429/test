@@ -153,7 +153,9 @@ test("sum", async () => {
       {
         \\"type\\": \\"error\\",
         \\"testName\\": \\"async function (timeout)\\",
-        \\"error\\": \\"timeout (specified time: 100ms)\\"
+        \\"error\\": {
+          \\"message\\": \\"timeout (specified time: 100ms)\\"
+        }
       }
     ]"
   `);

@@ -68,7 +68,9 @@ function constructResultHTML(status: Status, result: Result) {
 
   const errorHTML =
     result.type === "error" && result.error
-      ? `<div class="test-report__errors">${escapeHTML(result.error)}</div>`
+      ? `<div class="test-report__errors">${escapeHTML(
+          result.error.message
+        )}</div>`
       : "";
 
   return `
