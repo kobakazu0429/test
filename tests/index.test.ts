@@ -45,6 +45,10 @@ test("sum", async () => {
     100
   );
 
+  myTest("throw error", () => {
+    throw new Error("this is error");
+  });
+
   const { result, duration } = await run();
   expect(Number.isFinite(duration)).toBeTruthy();
   expect(JSON.stringify(result, null, 2)).toMatchInlineSnapshot(`
@@ -149,6 +153,11 @@ test("sum", async () => {
         \\"type\\": \\"error\\",
         \\"testName\\": \\"async function (timeout)\\",
         \\"error\\": \\"timeout (specified time: 100ms)\\"
+      },
+      {
+        \\"type\\": \\"error\\",
+        \\"testName\\": \\"throw error\\",
+        \\"error\\": \\"this is error\\"
       }
     ]"
   `);

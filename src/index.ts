@@ -85,28 +85,30 @@ export const run = async (): Promise<RunResult> => {
   const result: Array<Result> = [];
   for await (const [testName, testFn, timeout] of _tests) {
     // Refactor: me
-    // eslint-disable-next-line no-async-promise-executor
-    const r = await new Promise<any>(async (resolve, _reject) => {
-      try {
-        if (timeout) {
-          const timeoutId = setTimeout(() => {
-            resolve({
-              type: "error",
-              testName,
-              error: `timeout (specified time: ${timeout}ms)`,
-            });
-          }, timeout);
-          await testFn();
-          clearTimeout(timeoutId);
-          resolve(null);
-        } else {
-          await testFn();
-          resolve(null);
+    const r = await new Promise<ErrorResult | null>(
+      // eslint-disable-next-line no-async-promise-executor
+      async (resolve, _reject) => {
+        try {
+          if (timeout) {
+            const timeoutId = setTimeout(() => {
+              resolve({
+                type: "error",
+                testName,
+                error: `timeout (specified time: ${timeout}ms)`,
+              });
+            }, timeout);
+            await testFn();
+            clearTimeout(timeoutId);
+            resolve(null);
+          } else {
+            await testFn();
+            resolve(null);
+          }
+        } catch (error) {
+          resolve({ type: "error", testName, error: (error as Error).message });
         }
-      } catch (error) {
-        resolve(error);
       }
-    });
+    );
 
     if (r) {
       result.push(r);
