@@ -11,6 +11,9 @@ const _tests: TestCase[] = [];
 export const test = (...t: TestCase) => {
   _tests.push(t);
 };
+export const clearTest = () => {
+  _tests.length = 0;
+};
 
 export interface AssertionResult {
   matcherName: string;
@@ -128,5 +131,6 @@ export const run = async (): Promise<RunResult> => {
     _ClearResult();
   }
   const duration = globalThis.performance.now() - startTime;
+  clearTest();
   return { result, duration };
 };

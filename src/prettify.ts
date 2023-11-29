@@ -87,5 +87,9 @@ function constructResultHTML(status: Status, result: Result) {
 }
 
 function escapeHTML(html: string) {
-  return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return html
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replaceAll("\n", "\\n")
+    .replaceAll("\t", "\\t");
 }
