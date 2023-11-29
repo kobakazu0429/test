@@ -1,3 +1,4 @@
+import { test, beforeAll, expect } from "vitest";
 import { test as myTest, expect as myExpect, run } from "../src";
 import { performance } from "perf_hooks";
 
